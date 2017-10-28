@@ -1,5 +1,6 @@
 import minimax
-import nodo
+
+from Pablo import nodo
 
 
 def jugar_minimax(estado):

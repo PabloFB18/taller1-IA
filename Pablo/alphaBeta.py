@@ -1,4 +1,4 @@
-import nodo
+from Pablo import nodo
 
 
 def obtener_sucesores(estado_actual):
@@ -24,19 +24,21 @@ def jugar(estado_actual):
     :return: Jugada a realizar
     """
     jugadas = [[]]
-    maximo(estado_actual, jugadas)
+    alfa = -99
+    beta = 99
+    maximo(estado_actual, alfa, beta, jugadas)
     return jugadas[0]
 
 
-def maximo(estado_actual, jugadas):
+def maximo(estado_actual, alfa, beta, jugadas):
     if estado_actual.estado_objetivo():
-        return 0
-    if estado_actual.estado_final():
         return 1
+    if estado_actual.estado_final():
+        return 0
     valor_max = -10
     aux = nodo.Nodo([0, 0, 0])
     for sucesor in obtener_sucesores(estado_actual.estado):
-        valor = minimo(sucesor, jugadas)
+        valor = minimo(sucesor, alfa, beta, jugadas)
         if valor > valor_max:
             aux = sucesor
             valor_max = valor
@@ -44,15 +46,15 @@ def maximo(estado_actual, jugadas):
     return valor_max
 
 
-def minimo(estado_actual, jugadas):
+def minimo(estado_actual, alfa, beta, jugadas):
     if estado_actual.estado_objetivo():
-        return 1
-    if estado_actual.estado_final():
         return 0
+    if estado_actual.estado_final():
+        return 1
     valor_min = 10
     aux = nodo.Nodo([0, 0, 0])
     for sucesor in obtener_sucesores(estado_actual.estado):
-        valor = maximo(sucesor, jugadas)
+        valor = maximo(sucesor, alfa, beta, jugadas)
         if valor < valor_min:
             aux = sucesor
             valor_min = valor

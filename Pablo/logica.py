@@ -1,4 +1,4 @@
-import nodo
+from Pablo import nodo
 
 
 def estado_inicial():

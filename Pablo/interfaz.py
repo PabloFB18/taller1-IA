@@ -1,5 +1,6 @@
-import controlador
 import nodo
+
+from Pablo import controlador
 
 
 def main():
