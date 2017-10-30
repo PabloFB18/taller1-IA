@@ -1,4 +1,4 @@
-from Pablo import nodo
+import nodo
 
 
 def obtener_sucesores(estado_actual):

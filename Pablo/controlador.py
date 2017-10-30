@@ -1,16 +1,17 @@
 import minimax
 
-from Pablo import nodo
+import nodo
+import alphaBeta
 
 
 def jugar_minimax(estado):
     return minimax.jugar(estado)
 
 
-# def jugar_alpha_beta(estado):
-#     return alphaBeta.jugar(estado)
-#
-#
+def jugar_alpha_beta(estado):
+    return alphaBeta.jugar(estado)
+
+
 # def jugar_mejor_jugada(estado):
 #     return mejorJugada.jugar(estado)
 

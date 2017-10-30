@@ -1,12 +1,12 @@
-import nodo
+import Pablo.nodo
 
-from Pablo import controlador
+import Pablo.controlador
 
 
 def main():
 
-    estado = nodo.Nodo([7, 5, 3])
-    estado.estado = controlador.jugar_minimax(estado)
+    estado = Pablo.nodo.Nodo([7, 5, 3])
+    estado.estado = Pablo.controlador.jugar_alpha_beta(estado)
     print 'jugada'
     print estado.estado
 
