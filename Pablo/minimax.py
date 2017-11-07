@@ -23,7 +23,7 @@ def jugar(estado_actual):
     :param estado_actual: Es el estado actual
     :return: Jugada a realizar
     """
-    jugadas = [[]]
+    jugadas = [[0, 0, 0]]
     maximo(estado_actual, jugadas)
     return jugadas[0]
 

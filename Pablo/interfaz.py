@@ -1,48 +1,219 @@
-import Pablo.nodo
+import nodo
+import controlador
+import re
 
-import Pablo.controlador
+
+def opcion_valida(opcion):
+    if opcion is None:
+        return 1
+    pattern = re.compile("^[1-3]$")
+    if not pattern.match(opcion):
+        return 1
+    return 0
+    # else:
+    #     opcion = int(opcion)
+    # if opcion == 1:
+    #     return 0
+    # if opcion == 2:
+    #     return 0
+    # if opcion == 3:
+    #     return 0
+    # return 1
+
+
+def realizar_jugada(estado_actual):
+    # Recibir jugada.
+    jugada = list(raw_input('Realice una jugada: a,b,c: ').replace(',', ''))
+
+    # Validacion jugada invalida.
+    while not controlador.jugada_valida(jugada, estado_actual):
+        print 'Jugada invalida'
+        jugada = list(raw_input('Realice una jugada: a,b,c: ').replace(',', ''))
+
+    return jugada
+
+
+def opcion_valida_orden(opcion_orden):
+    if opcion_orden is None:
+        return 1
+    pattern = re.compile("^[1-2]$")
+    if not pattern.match(opcion_orden):
+        return 1
+    return 0
 
 
 def main():
 
-    estado = Pablo.nodo.Nodo([7, 5, 3])
-    estado.estado = Pablo.controlador.jugar_alpha_beta(estado)
-    print 'jugada'
-    print estado.estado
+    # estado = Pablo.nodo.Nodo([7, 5, 3])
+    # estado.estado = Pablo.controlador.jugar_alpha_beta(estado)
+    # print 'jugada'
+    # print estado.estado
 
-    # print 'Hola'
-    # opcion = 0
-    # # menu
-    # while opcion != 3:
-    #     # preguntar por la opcion
-    #     print 'Opciones: jugar primero[1], jugar segundo[2], salir[3]'
-    #     opcion = input()
-    #     # verificar opcion valida
-    #     while opcion != 1 and opcion != 2 and opcion != 3:
-    #         print 'Opciones: jugar primero[1], jugar segundo[2], salir[3]'
-    #         opcion = input()
-    #
-    #     if opcion == 1:
-    #         estado_actual = logica.estado_inicial()
-    #
-    #         while estado_actual != [0, 0, 0]:
-    #             print estado_actual.estado
-    #             print 'Realice una jugada: columna, cantidad'
-    #             jugada = input()
-    #             jugada_columna = int(jugada[0])
-    #             jugada_cantidad = int(jugada[1])
-    #
-    #             # falta validacion jugada invalida
-    #
-    #             estado_actual.estado[jugada_columna - 1] = jugada_cantidad
-    #
-    #             print estado_actual.estado
-    #
-    #             estado_actual.estado = logica.jugar(estado_actual)
-    #
-    #             print estado_actual.estado
-    #
-    # print 'Chao'
+    print 'Hola'
+    opcion_principal = 0
+    # menu
+    while opcion_principal != 3:
+
+        # Preguntar por la opcion.
+        opcion_principal = raw_input('Opciones: minimax[1], poda alfa-beta[2], salir[3]: ')
+        # Verificar opcion valida.
+        while opcion_valida(opcion_principal):
+            print 'Opcion invalida'
+
+            opcion_principal = raw_input('Opciones: minimax[1], poda alfa-beta[2], salir[3]: ')
+        opcion_principal = int(opcion_principal)
+
+        # Opcion 1: minimax.
+        if opcion_principal == 1:
+
+            # Preguntar quien juega primero.
+            opcion_orden = raw_input('Opciones: jugar primero[1], jugar segundo[2]: ')
+            # Verificar opcion valida.
+            while opcion_valida_orden(opcion_orden):
+                print 'Opcion invalida'
+
+                opcion_orden = raw_input('Opciones: jugar primero[1], jugar segundo[2]: ')
+            opcion_orden = int(opcion_orden)
+
+            # Jugar primero.
+            if opcion_orden == 1:
+
+                # Crear el juego.
+                estado_actual = controlador.estado_inicial()
+
+                while 1:
+                    # Imprimir el estado del juego.
+                    print estado_actual.estado
+
+                    # Pociciones [a, b, c] del juego.
+                    # Jugada persona
+                    estado_actual.estado = realizar_jugada(estado_actual)
+
+                    # Termino de la partida.
+                    if estado_actual.estado_final():
+                        print 'Has sido derrotado'
+                        break
+
+                    print 'Pensando...'
+
+                    # Jugada IA.
+                    estado_actual.estado = controlador.jugar_minimax(estado_actual)
+
+                    # Termino de la partida.
+                    if estado_actual.estado_final():
+                        print 'Has ganado'
+                        break
+
+                print 'juego terminado'
+
+            # Jugar segundo.
+            else:
+
+                # Crear el juego.
+                estado_actual = controlador.estado_inicial()
+
+                while 1:
+
+                    print 'Pensando...'
+
+                    # Jugada IA.
+                    estado_actual.estado = controlador.jugar_minimax(estado_actual)
+
+                    # Termino de la partida.
+                    if estado_actual.estado_final():
+                        print 'Has ganado'
+                        break
+
+                    # Imprimir el estado del juego.
+                    print estado_actual.estado
+
+                    # Pociciones [a, b, c] del juego.
+                    # Jugada persona
+                    estado_actual.estado = realizar_jugada(estado_actual)
+
+                    # Termino de la partida.
+                    if estado_actual.estado_final():
+                        print 'Has sido derrotado'
+                        break
+
+                print 'juego terminado'
+
+        # Jugar poda alfa-beta
+        if opcion_principal == 2:
+
+            # Preguntar quien juega primero.
+            opcion_orden = raw_input('Opciones: jugar primero[1], jugar segundo[2]: ')
+            # Verificar opcion valida.
+            while opcion_valida_orden(opcion_orden):
+                print 'Opcion invalida'
+
+                opcion_orden = raw_input('Opciones: jugar primero[1], jugar segundo[2]: ')
+            opcion_orden = int(opcion_orden)
+
+            # Jugar primero.
+            if opcion_orden == 1:
+
+                # Crear el juego.
+                estado_actual = controlador.estado_inicial()
+
+                while 1:
+                    # Imprimir el estado del juego.
+                    print estado_actual.estado
+
+                    # Pociciones [a, b, c] del juego.
+                    # Jugada persona
+                    estado_actual.estado = realizar_jugada(estado_actual)
+
+                    # Termino de la partida.
+                    if estado_actual.estado_final():
+                        print 'Has sido derrotado'
+                        break
+
+                    print 'Pensando...'
+
+                    # Jugada IA.
+                    estado_actual.estado = controlador.jugar_alpha_beta(estado_actual)
+
+                    # Termino de la partida.
+                    if estado_actual.estado_final():
+                        print 'Has ganado'
+                        break
+
+                print 'juego terminado'
+
+            # Jugar segundo.
+            else:
+
+                # Crear el juego.
+                estado_actual = controlador.estado_inicial()
+
+                while 1:
+
+                    print 'Pensando...'
+
+                    # Jugada IA.
+                    estado_actual.estado = controlador.jugar_alpha_beta(estado_actual)
+
+                    # Termino de la partida.
+                    if estado_actual.estado_final():
+                        print 'Has ganado'
+                        break
+
+                    # Imprimir el estado del juego.
+                    print estado_actual.estado
+
+                    # Pociciones [a, b, c] del juego.
+                    # Jugada persona
+                    estado_actual.estado = realizar_jugada(estado_actual)
+
+                    # Termino de la partida.
+                    if estado_actual.estado_final():
+                        print 'Has sido derrotado'
+                        break
+
+                print 'juego terminado'
+
+    print 'Chao'
 
 
 if __name__ == '__main__':

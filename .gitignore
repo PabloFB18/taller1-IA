@@ -102,8 +102,4 @@ ENV/
 
 # Pycharm
 .idea/
-.idea/inspectionProfiles/
-.idea/misc.xml
-.idea/taller1-IA.iml
-.idea/workspace.xml
 
