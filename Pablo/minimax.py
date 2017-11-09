@@ -51,7 +51,6 @@ def posicion_ventaja(estado_evaluar):
         if len(bin_lista) < 3:
             while len(bin_lista) < 3:
                 bin_lista = ['0'] + bin_lista
-            # bin_lista = list(reversed(bin_lista))
         for j in range(0, 3):
             sum_bin[j] = sumar(sum_bin[j], int(bin_lista[j]))
     if sum(sum_bin) == 0:
@@ -62,8 +61,24 @@ def posicion_ventaja(estado_evaluar):
 def suma_lista(estado_evaluar):
     suma = 0
     for elem in estado_evaluar:
-        suma = suma + elem
+        suma += elem
     return suma
+
+
+def suma_ceros(estado_evaluar):
+    sum_ceros = 0
+    for elem in estado_evaluar:
+        if elem == 0:
+            sum_ceros += 1
+    return sum_ceros
+
+
+def suma_unos(estado_evaluar):
+    sum_unos = 0
+    for elem in estado_evaluar:
+        if elem == 1:
+            sum_unos += 1
+    return sum_unos
 
 
 def evaluar_jugada(estado_evaluar):
@@ -77,6 +92,12 @@ def evaluar_jugada(estado_evaluar):
         return -50
     if estado_final(estado_evaluar):
         return 50
+    if suma_ceros(estado_evaluar) == 2:
+        return -45
+    if suma_unos(estado_evaluar) == 2:
+        return -45
+    if suma_unos(estado_evaluar) == 3:
+        return 45
     if posicion_ventaja(estado_evaluar):
         return 40 - suma_lista(estado_evaluar)
     return suma_lista(estado_evaluar)
@@ -142,7 +163,7 @@ def maximo(estado_actual, jugadas):
     aux = nodo.Nodo([0, 0, 0])
     for sucesor in obtener_sucesores(estado_actual.estado):
         valor = minimo(sucesor, jugadas)
-        if valor > valor_max:
+        if valor >= valor_max:
             aux = sucesor
             valor_max = valor
     jugadas[0] = aux.estado
@@ -158,7 +179,7 @@ def minimo(estado_actual, jugadas):
     aux = nodo.Nodo([0, 0, 0])
     for sucesor in obtener_sucesores(estado_actual.estado):
         valor = maximo(sucesor, jugadas)
-        if valor < valor_min:
+        if valor <= valor_min:
             aux = sucesor
             valor_min = valor
     jugadas[0] = aux.estado
