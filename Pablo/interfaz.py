@@ -2,6 +2,8 @@ import nodo
 import controlador
 import re
 
+import minimax
+
 
 def opcion_valida(opcion):
     if opcion is None:
@@ -43,11 +45,6 @@ def opcion_valida_orden(opcion_orden):
 
 
 def main():
-
-    # estado = Pablo.nodo.Nodo([7, 5, 3])
-    # estado.estado = Pablo.controlador.jugar_alpha_beta(estado)
-    # print 'jugada'
-    # print estado.estado
 
     print 'Hola'
     opcion_principal = 0
@@ -101,6 +98,8 @@ def main():
 
                     # Termino de la partida.
                     if estado_actual.estado_final():
+                        # Imprimir el estado del juego.
+                        print estado_actual.estado
                         print 'Has ganado'
                         break
 
@@ -121,6 +120,8 @@ def main():
 
                     # Termino de la partida.
                     if estado_actual.estado_final():
+                        # Imprimir el estado del juego.
+                        print estado_actual.estado
                         print 'Has ganado'
                         break
 
@@ -176,6 +177,8 @@ def main():
 
                     # Termino de la partida.
                     if estado_actual.estado_final():
+                        # Imprimir el estado del juego.
+                        print estado_actual.estado
                         print 'Has ganado'
                         break
 
@@ -196,6 +199,8 @@ def main():
 
                     # Termino de la partida.
                     if estado_actual.estado_final():
+                        # Imprimir el estado del juego.
+                        print estado_actual.estado
                         print 'Has ganado'
                         break
 

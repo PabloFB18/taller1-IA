@@ -4,6 +4,9 @@ import nodo
 def obtener_sucesores(estado_actual):
     """
     Obtiene los sucesores.
+    REGLAS:
+    -
+    -
     :param estado_actual: Estado actual del cual obtendra los sucesores.
     :return: Tupla con los sucesores.
     """

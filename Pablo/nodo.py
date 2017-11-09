@@ -1,17 +1,14 @@
 class Nodo:
-    def __init__(self, estado, heuristica):
+    def __init__(self, estado, heuristica=0):
         self.estado = estado
         self.heuristica = heuristica
-
-    def __init__(self, estado):
-        self.estado = estado
 
     def estado_objetivo(self):
         """
         Define el estado objetivo.
         :return: Verdadero si es un estado objetivo y falso si no lo es.
         """
-        if self.estado == [1, 0, 0] or self.estado  == [0, 1, 0] or self.estado  == [0, 0, 1]:
+        if self.estado == [1, 0, 0] or self.estado == [0, 1, 0] or self.estado == [0, 0, 1]:
             return 1
         else:
             return 0
