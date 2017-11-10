@@ -186,6 +186,8 @@ def jugar(estado_actual):
 def maximo(estado_actual, alfa, beta, jugadas):
     """
     Retorna la jugada con mayor valor de la heuristica.
+    :param beta: Valor para determinar cuando podar en min.
+    :param alfa: Valor para determinar cuando podar en max.
     :param estado_actual: Jugada a evaluar.
     :param jugadas: Variable donde se guarda la jugada a realizar.
     :return: Valor de laheuristica.
@@ -211,6 +213,8 @@ def maximo(estado_actual, alfa, beta, jugadas):
 def minimo(estado_actual, alfa, beta, jugadas):
     """
     Reorna la jugada con menor valor de la heuristica.
+    :param beta: Valor para determinar cuando podar en min.
+    :param alfa: Valor para determinar cuando podar en max.
     :param estado_actual: Jugada a evaluar.
     :param jugadas: Variable donde se guarda la jugada a realizar.
     :return: Valor de laheuristica.
