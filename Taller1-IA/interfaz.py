@@ -1,28 +1,15 @@
 # -*- coding: utf-8 -*-import controlador
-import re
 
 import controlador
-
-
-def opcion_valida(opcion):
-    if opcion is None:
-        return 1
-    pattern = re.compile('^[1-4]$')
-    if not pattern.match(opcion):
-        return 1
-    return 0
-    # else:
-    #     opcion = int(opcion)
-    # if opcion == 1:
-    #     return 0
-    # if opcion == 2:
-    #     return 0
-    # if opcion == 3:
-    #     return 0
-    # return 1
+import validaciones
 
 
 def realizar_jugada(estado_actual):
+    """
+    Recibe la jugada por pantalla.
+    :param estado_actual: Estado previo a recibir la nueva jugada.
+    :return: Reorna la juada recibida.
+    """
     # Recibir jugada.
     jugada = list(raw_input('Realice una jugada: ').replace(',', ''))
 
@@ -34,16 +21,11 @@ def realizar_jugada(estado_actual):
     return jugada
 
 
-def opcion_valida_orden(opcion_orden):
-    if opcion_orden is None:
-        return 1
-    pattern = re.compile('^[1-2]$')
-    if not pattern.match(opcion_orden):
-        return 1
-    return 0
-
-
 def instrucciones():
+    """
+    Instruciones del juego.
+    :return: void.
+    """
     print ' '
     print 'Instrucciones:'
     print '- El juego consiste en alinear 15 palos de fósforos en tres filas.'
@@ -62,8 +44,31 @@ def instrucciones():
     print ' '
 
 
-def main():
+def mensaje_derrota():
+    """
+    Mensaje de derrota.
+    :return: void.
+    """
+    print ' '
+    print 'Has sido derrotado'
+    print ' '
 
+
+def mensaje_victoria():
+    """
+    Mensaje de victoria.
+    :return: void.
+    """
+    print ' '
+    print 'Has ganado'
+    print ' '
+
+
+def main():
+    """
+    Menu del juego con todas las posibles opciones.
+    :return: void.
+    """
     print ' '
     print 'Bienvenido al juego de NIM'
     print ' '
@@ -75,7 +80,7 @@ def main():
         # Preguntar por la opcion.
         opcion_principal = raw_input('Opciones: minimax[1], poda alfa-beta[2], intrucciones[3], salir[4]: ')
         # Verificar opcion valida.
-        while opcion_valida(opcion_principal):
+        while validaciones.opcion_valida(opcion_principal):
             print 'Opcion invalida'
 
             opcion_principal = raw_input('Opciones: minimax[1], poda alfa-beta[2], instrucciones[3], salir[4]: ')
@@ -91,10 +96,10 @@ def main():
             # Preguntar quien juega primero.
             opcion_orden = raw_input('Opciones: jugar primero[1], jugar segundo[2]: ')
             # Verificar opcion valida.
-            while opcion_valida_orden(opcion_orden):
+            while validaciones.opcion_valida_orden(opcion_orden):
                 print 'Opcion invalida'
-
                 opcion_orden = raw_input('Opciones: jugar primero[1], jugar segundo[2]: ')
+
             opcion_orden = int(opcion_orden)
 
             print ' '
@@ -115,9 +120,7 @@ def main():
 
                     # Termino de la partida.
                     if estado_actual.estado_final():
-                        print ' '
-                        print 'Has sido derrotado'
-                        print ' '
+                        mensaje_derrota()
                         break
 
                     print 'Pensando...'
@@ -129,9 +132,7 @@ def main():
                     if estado_actual.estado_final():
                         # Imprimir el estado del juego.
                         print estado_actual.estado
-                        print ' '
-                        print 'Has ganado'
-                        print ' '
+                        mensaje_victoria()
                         break
 
             # Jugar segundo.
@@ -151,9 +152,7 @@ def main():
                     if estado_actual.estado_final():
                         # Imprimir el estado del juego.
                         print estado_actual.estado
-                        print ' '
-                        print 'Has ganado'
-                        print ' '
+                        mensaje_victoria()
                         break
 
                     # Imprimir el estado del juego.
@@ -165,9 +164,7 @@ def main():
 
                     # Termino de la partida.
                     if estado_actual.estado_final():
-                        print ' '
-                        print 'Has sido derrotado'
-                        print ' '
+                        mensaje_derrota()
                         break
 
         # Jugar poda alfa-beta
@@ -176,7 +173,7 @@ def main():
             # Preguntar quien juega primero.
             opcion_orden = raw_input('Opciones: jugar primero[1], jugar segundo[2]: ')
             # Verificar opcion valida.
-            while opcion_valida_orden(opcion_orden):
+            while validaciones.opcion_valida_orden(opcion_orden):
                 print 'Opcion invalida'
 
                 opcion_orden = raw_input('Opciones: jugar primero[1], jugar segundo[2]: ')
@@ -200,9 +197,7 @@ def main():
 
                     # Termino de la partida.
                     if estado_actual.estado_final():
-                        print ' '
-                        print 'Has sido derrotado'
-                        print ' '
+                        mensaje_derrota()
                         break
 
                     print 'Pensando...'
@@ -214,12 +209,8 @@ def main():
                     if estado_actual.estado_final():
                         # Imprimir el estado del juego.
                         print estado_actual.estado
-                        print ' '
-                        print 'Has ganado'
-                        print ' '
+                        mensaje_victoria()
                         break
-
-                print 'juego terminado'
 
             # Jugar segundo.
             else:
@@ -238,9 +229,7 @@ def main():
                     if estado_actual.estado_final():
                         # Imprimir el estado del juego.
                         print estado_actual.estado
-                        print ' '
-                        print 'Has ganado'
-                        print ' '
+                        mensaje_victoria()
                         break
 
                     # Imprimir el estado del juego.
@@ -252,13 +241,12 @@ def main():
 
                     # Termino de la partida.
                     if estado_actual.estado_final():
-                        print ' '
-                        print 'Has sido derrotado'
-                        print ' '
+                        mensaje_derrota()
                         break
 
+    print ' '
     print 'Adios'
-    
+
 
 if __name__ == '__main__':
     main()

@@ -1,5 +1,13 @@
 class Nodo:
+    """
+    Nodo para el arbol del minimax y poda alfa-beta.
+    """
     def __init__(self, estado, heuristica=0):
+        """
+        Constructor del nodo.
+        :param estado: Estado de los palitos, representados por una lista.
+        :param heuristica: Valor asociado a la posicion de los palitos
+        """
         self.estado = estado
         self.heuristica = heuristica
 
