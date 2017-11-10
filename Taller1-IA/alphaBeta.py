@@ -202,8 +202,8 @@ def maximo(estado_actual, alfa, beta, jugadas):
         # Verificar si se debe modificar el valor de alfa
         if valor > alfa:
             alfa = valor
-            # Guardar la posible jugada a realizar.
-            jugadas[0] = sucesor.estado
+        # Guardar la posible jugada a realizar.
+        jugadas[0] = sucesor.estado
         # Verificar si se debe hacer poda.
         if valor >= beta:
             return alfa
@@ -229,8 +229,8 @@ def minimo(estado_actual, alfa, beta, jugadas):
         # Verificar si se debe modificar el valor de alfa
         if valor < beta:
             beta = valor
-            # Guardar la posible jugada a realizar.
-            jugadas[0] = sucesor.estado
+        # Guardar la posible jugada a realizar.
+        jugadas[0] = sucesor.estado
         # Verificar si se debe hacer poda.
         if valor <= alfa:
             return beta

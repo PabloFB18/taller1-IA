@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-import controlador
-
+from time import time
 import controlador
 import validaciones
 
@@ -110,13 +110,26 @@ def main():
                 # Crear el juego.
                 estado_actual = controlador.estado_inicial()
 
-                while 1:
-                    # Imprimir el estado del juego.
-                    print estado_actual.estado
+                # Imprimir el estado del juego.
+                print estado_actual.estado
 
-                    # Pociciones [a, b, c] del juego.
+                while 1:
+
+                    # Obtener el tiempo antes de que juegue la persona.
+                    tiempo_inicio_jugador = time()
+
                     # Jugada persona
                     estado_actual.estado = realizar_jugada(estado_actual)
+
+                    # Obtener el tiempo despues de que juegue la persona.
+                    tiempo_termino_jugador = time()
+
+                    # En caso de que la jugada demore mas de 30 segundos.
+                    if tiempo_termino_jugador - tiempo_inicio_jugador > 30:
+                        print ' '
+                        print 'Has pasado los 30 segundos, perdiste.'
+                        print ' '
+                        break
 
                     # Termino de la partida.
                     if estado_actual.estado_final():
@@ -125,13 +138,29 @@ def main():
 
                     print 'Pensando...'
 
+                    # Obtener el tiempo antes de ejecutar algoritmo.
+                    tiempo_inicio_maquina = time()
+
                     # Jugada IA.
                     estado_actual.estado = controlador.jugar_minimax(estado_actual)
 
+                    # Obtener el tiempo despues de ejecutar algoritmo.
+                    tiempo_termino_maquina = time()
+
+                    # En caso de que la jugada demore mas de 30 segundos.
+                    if tiempo_termino_maquina - tiempo_inicio_maquina > 30:
+                        print ' '
+                        print 'Han pasado 30 segundos, ganaste.'
+                        print ' '
+                        break
+
+                    # Imprimir el estado del juego.
+                    print estado_actual.estado
+
+                    print 'La jugada demoro: ' + str(tiempo_termino_maquina - tiempo_inicio_maquina) + ' segundos.'
+
                     # Termino de la partida.
                     if estado_actual.estado_final():
-                        # Imprimir el estado del juego.
-                        print estado_actual.estado
                         mensaje_victoria()
                         break
 
@@ -145,22 +174,47 @@ def main():
 
                     print 'Pensando...'
 
+                    # Obtener el tiempo antes de ejecutar algoritmo.
+                    tiempo_inicio_maquina = time()
+
                     # Jugada IA.
                     estado_actual.estado = controlador.jugar_minimax(estado_actual)
 
-                    # Termino de la partida.
-                    if estado_actual.estado_final():
-                        # Imprimir el estado del juego.
-                        print estado_actual.estado
-                        mensaje_victoria()
+                    # Obtener el tiempo despues de ejecutar algoritmo.
+                    tiempo_termino_maquina = time()
+
+                    # En caso de que la jugada demore mas de 30 segundos.
+                    if tiempo_termino_maquina - tiempo_inicio_maquina > 30:
+                        print ' '
+                        print 'Han pasado 30 segundos, ganaste.'
+                        print ' '
                         break
 
                     # Imprimir el estado del juego.
                     print estado_actual.estado
 
-                    # Pociciones [a, b, c] del juego.
+                    print 'La jugada demoro: ' + str(tiempo_termino_maquina - tiempo_inicio_maquina) + ' segundos.'
+
+                    # Termino de la partida.
+                    if estado_actual.estado_final():
+                        mensaje_victoria()
+                        break
+
+                    # Obtener el tiempo antes de que juegue la persona.
+                    tiempo_inicio_jugador = time()
+
                     # Jugada persona
                     estado_actual.estado = realizar_jugada(estado_actual)
+
+                    # Obtener el tiempo despues de que juegue la persona.
+                    tiempo_termino_jugador = time()
+
+                    # En caso de que la jugada demore mas de 30 segundos.
+                    if tiempo_termino_jugador - tiempo_inicio_jugador > 30:
+                        print ' '
+                        print 'Has pasado los 30 segundos, perdiste.'
+                        print ' '
+                        break
 
                     # Termino de la partida.
                     if estado_actual.estado_final():
@@ -187,13 +241,26 @@ def main():
                 # Crear el juego.
                 estado_actual = controlador.estado_inicial()
 
-                while 1:
-                    # Imprimir el estado del juego.
-                    print estado_actual.estado
+                # Imprimir el estado del juego.
+                print estado_actual.estado
 
-                    # Pociciones [a, b, c] del juego.
+                while 1:
+
+                    # Obtener el tiempo antes de que juegue la persona.
+                    tiempo_inicio_jugador = time()
+
                     # Jugada persona
                     estado_actual.estado = realizar_jugada(estado_actual)
+
+                    # Obtener el tiempo despues de que juegue la persona.
+                    tiempo_termino_jugador = time()
+
+                    # En caso de que la jugada demore mas de 30 segundos.
+                    if tiempo_termino_jugador - tiempo_inicio_jugador > 30:
+                        print ' '
+                        print 'Has pasado los 30 segundos, perdiste.'
+                        print ' '
+                        break
 
                     # Termino de la partida.
                     if estado_actual.estado_final():
@@ -202,13 +269,29 @@ def main():
 
                     print 'Pensando...'
 
+                    # Obtener el tiempo antes de ejecutar algoritmo.
+                    tiempo_inicio_maquina = time()
+
                     # Jugada IA.
                     estado_actual.estado = controlador.jugar_alpha_beta(estado_actual)
 
+                    # Obtener el tiempo despues de ejecutar algoritmo.
+                    tiempo_termino_maquina = time()
+
+                    # En caso de que la jugada demore mas de 30 segundos.
+                    if tiempo_termino_maquina - tiempo_inicio_maquina > 30:
+                        print ' '
+                        print 'Han pasado 30 segundos, ganaste.'
+                        print ' '
+                        break
+
+                    # Imprimir el estado del juego.
+                    print estado_actual.estado
+
+                    print 'La jugada demoro: ' + str(tiempo_termino_maquina - tiempo_inicio_maquina) + ' segundos.'
+
                     # Termino de la partida.
                     if estado_actual.estado_final():
-                        # Imprimir el estado del juego.
-                        print estado_actual.estado
                         mensaje_victoria()
                         break
 
@@ -222,22 +305,47 @@ def main():
 
                     print 'Pensando...'
 
+                    # Obtener el tiempo antes de ejecutar algoritmo.
+                    tiempo_inicio_maquina = time()
+
                     # Jugada IA.
                     estado_actual.estado = controlador.jugar_alpha_beta(estado_actual)
 
-                    # Termino de la partida.
-                    if estado_actual.estado_final():
-                        # Imprimir el estado del juego.
-                        print estado_actual.estado
-                        mensaje_victoria()
+                    # Obtener el tiempo despues de ejecutar algoritmo.
+                    tiempo_termino_maquina = time()
+
+                    # En caso de que la jugada demore mas de 30 segundos.
+                    if tiempo_termino_maquina - tiempo_inicio_maquina > 30:
+                        print ' '
+                        print 'Han pasado 30 segundos, ganaste.'
+                        print ' '
                         break
 
                     # Imprimir el estado del juego.
                     print estado_actual.estado
 
-                    # Pociciones [a, b, c] del juego.
+                    print 'La jugada demoro: ' + str(tiempo_termino_maquina - tiempo_inicio_maquina) + ' segundos.'
+
+                    # Termino de la partida.
+                    if estado_actual.estado_final():
+                        mensaje_victoria()
+                        break
+
+                    # Obtener el tiempo antes de que juegue la persona.
+                    tiempo_inicio_jugador = time()
+
                     # Jugada persona
                     estado_actual.estado = realizar_jugada(estado_actual)
+
+                    # Obtener el tiempo despues de que juegue la persona.
+                    tiempo_termino_jugador = time()
+
+                    # En caso de que la jugada demore mas de 30 segundos.
+                    if tiempo_termino_jugador - tiempo_inicio_jugador > 30:
+                        print ' '
+                        print 'Has pasado los 30 segundos, perdiste.'
+                        print ' '
+                        break
 
                     # Termino de la partida.
                     if estado_actual.estado_final():
