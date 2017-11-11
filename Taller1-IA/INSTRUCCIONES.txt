@@ -1,0 +1,3 @@
+Para jugar debe ejecutar interfaz.py
+
+Recuerde usar Python 2.7
